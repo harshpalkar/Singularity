@@ -1,0 +1,74 @@
+/* Full-page container */
+.landing-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 15%;    // move text slightly above center
+  text-align: center;
+  background: #0a0a0a; // plain dark background (can change if needed)
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #0a0a0a; // match your landing page background
+}
+
+
+/* Gradient text effect */
+.app-title h1 {
+  font-size: 6rem;
+  font-weight: 900;
+  line-height: 1.2;
+  word-wrap: break-word;
+  text-transform: uppercase;
+    font-family: "Butler", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+
+  /* Gradient applied to text */
+  background: linear-gradient(-45deg, #550150, #7873f5, #2092de, #0673b1);
+  background-size: 500% 400%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  animation: gradientText 8s ease infinite;
+}
+
+/* Animate gradient movement */
+@keyframes gradientText {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-title h1 {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-title h1 {
+    font-size: 3rem;
+  }
+}
+
+
+
+.app-title h3 {
+    font-size: 1rem;
+    color: white;
+    font-weight: 400;
+    // line-height: 1.2;
+    word-wrap: break-word;     // handle wrapping if screen is small
+    // text-shadow: 0 0 20px rgba(0,0,0,0.3);
+    font-family: "Butler", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+}
