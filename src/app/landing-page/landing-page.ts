@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-landing-page',
-  imports: [],
+  imports: [IonicModule],
   templateUrl: './landing-page.html',
   styleUrl: './landing-page.scss'
 })

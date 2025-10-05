@@ -1,74 +1,146 @@
-/* Full-page container */
+@import url('https://fonts.googleapis.com/css2?family=Cascadia+Mono:ital,wght@0,200..700;1,200..700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 .landing-container {
   height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-top: 15%;    // move text slightly above center
-  text-align: center;
-  background: #0a0a0a; // plain dark background (can change if needed)
+  flex-direction: column; // stack elements vertically
+  justify-content: center; // center search bar vertically
+  align-items: center; // center search bar horizontally
+  background: radial-gradient(circle at 20% 30%, #141414, #0b0b0b 70%);
+  position:relative;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  color: white;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    max-width: 100vw;
+    max-height: 100vh;
+    background: radial-gradient(circle, rgba(58, 128, 255, 0.25), transparent 70%);
+    filter: blur(100px);
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: float 8s ease-in-out infinite alternate;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 0, 128, 0.25), transparent 70%);
+    filter: blur(80px);
+    bottom: 15%;
+    left: 30%;
+    animation: float 10s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes float {
+    from {
+      transform: translate(-50%, 0) scale(1);
+    }
+    to {
+      transform: translate(-50%, 10%) scale(1.1);
+    }
+  }
+
+  // Overlay remains the same
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+  }
 }
 
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
-  background: #0a0a0a; // match your landing page background
+  width: 100%;
+  height: 100%;
+  overflow: hidden; // prevents any scrolling
 }
 
 
-/* Gradient text effect */
-.app-title h1 {
-  font-size: 6rem;
-  font-weight: 900;
-  line-height: 1.2;
-  word-wrap: break-word;
-  text-transform: uppercase;
-    font-family: "Butler", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
+// Top-left title container
+.header {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  text-align: left;
+  z-index: 2;
 
-  /* Gradient applied to text */
-  background: linear-gradient(-45deg, #550150, #7873f5, #2092de, #0673b1);
-  background-size: 500% 400%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-
-  animation: gradientText 8s ease infinite;
-}
-
-/* Animate gradient movement */
-@keyframes gradientText {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .app-title h1 {
-    font-size: 4rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .app-title h1 {
+  .title {
     font-size: 3rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, #4cc9f0, #f72585);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 }
 
+// Search bar container stays centered
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  .subtitle {
+    font-size: 1.2rem;
+    position: relative;
+    color: #bfbfbf;
+    margin-bottom: 1.5rem;
+    text-align: center ;
+  }
+  .search-wrapper {
+    position: relative;
+      width: 100%; // make it stretch the full width of .content
+    max-width: 400px; // keep max width
 
-.app-title h3 {
-    font-size: 1rem;
-    color: white;
-    font-weight: 400;
-    // line-height: 1.2;
-    word-wrap: break-word;     // handle wrapping if screen is small
-    // text-shadow: 0 0 20px rgba(0,0,0,0.3);
-    font-family: "Butler", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
+    input {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.9rem 1.2rem;
+      border-radius: 2rem;
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      z-index: 2;
+      position: relative;
+
+      &::placeholder {
+        color: #aaaaaa;
+      }
+
+      &:focus {
+        background: rgba(255, 255, 255, 0.15);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        transform: scale(1.2);
+        z-index: 3;
+
+        & ~ .overlay {
+          opacity: 5;
+          pointer-events: auto;
+        }
+      }
+    }
+  }
 }
